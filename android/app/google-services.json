@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "519336276930",
+    "project_id": "pisale-80b0a",
+    "storage_bucket": "pisale-80b0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519336276930:android:8c45619bc22ff5722fdc5b",
+        "android_client_info": {
+          "package_name": "com.example.pisale"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "519336276930-krb1ln0tg94dfi31dflc2m7vgh0im0sj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqLLYLGIYsYXcF8nn15wvnxoZWU31e4As"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519336276930-krb1ln0tg94dfi31dflc2m7vgh0im0sj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "519336276930-7014panfru2lm5aet0qf807sb1iqqhnr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pisale"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
