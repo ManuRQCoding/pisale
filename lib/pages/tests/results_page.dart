@@ -41,6 +41,7 @@ class ResultsPage extends StatelessWidget {
                   child: SizedBox(
                     height: item.answers.length * 25,
                     child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
                         itemCount: item.answers.length,
                         itemBuilder: (context, i) {
                           final answer = item.answers[i];
