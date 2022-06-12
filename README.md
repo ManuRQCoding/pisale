@@ -43,7 +43,7 @@ Después elegir un test:
 
 <img src="https://user-images.githubusercontent.com/80096502/173249362-62b23f98-7aae-4dbf-9581-68d1101f6619.png" width=250>
 
-Y ya podemos empezar a hacer nuestro test:
+Y una vez seleccionemos nuestro modo de examen ya podemos empezar a hacer nuestro test:
 
 <img src="https://user-images.githubusercontent.com/80096502/173249278-37f36857-4525-44d4-bdbb-6c3355e9cf97.png" width=250>
 
