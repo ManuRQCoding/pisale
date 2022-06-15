@@ -15,7 +15,7 @@ class ResultsPage extends StatelessWidget {
             onPressed: () {
               testProv.reset();
               int count = 0;
-              Navigator.of(context).popUntil((_) => count++ >= 3);
+              Navigator.of(context).popUntil((_) => count++ >= 2);
             },
             icon: Icon(Icons.arrow_back_ios_outlined)),
         title: Text('Resultados'),
@@ -47,14 +47,18 @@ class ResultsPage extends StatelessWidget {
                           final answer = item.answers[i];
                           return Row(
                             children: [
-                              Text(
-                                  '${String.fromCharCode(65 + i)}) ${answer.content}',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: item.selected!.content ==
-                                              answer.content
-                                          ? FontWeight.bold
-                                          : FontWeight.normal)),
+                              Flexible(
+                                child: FittedBox(
+                                  child: Text(
+                                      '${String.fromCharCode(65 + i)}) ${answer.content}',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: item.selected!.content ==
+                                                  answer.content
+                                              ? FontWeight.bold
+                                              : FontWeight.normal)),
+                                ),
+                              ),
                               item.selected!.content == answer.content &&
                                       !answer.correct
                                   ? Icon(

@@ -123,11 +123,15 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        actualQuestion.content,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          actualQuestion.content,
+                                          textAlign: TextAlign.justify,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
+                                        ),
                                       ),
                                       SizedBox(
                                         height:
