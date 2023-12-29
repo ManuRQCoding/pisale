@@ -36,17 +36,15 @@ class TestsPage extends StatelessWidget {
         title: Text('Tests'),
       ),
       body: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection('tests')
-              .where(FieldPath.documentId,
-                  whereIn: testsIds.map((e) => e.toString()).toList())
-              .snapshots(),
+          stream: FirebaseFirestore.instance.collection('tests').snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator.adaptive());
             }
 
-            final data = snapshot.data!.docs;
+            final data = snapshot.data!.docs
+                .where((element) => testsIds.contains(element.id))
+                .toList();
             data.sort((a, b) => a
                 .get('title')
                 .toString()

@@ -28,6 +28,8 @@ class _QuestionsPageState extends State<QuestionsPage> {
     _controller = PageController();
   }
 
+  // after all of the data is fetched, return it
+
   @override
   Widget build(BuildContext context) {
     final testProv = Provider.of<TestProvider>(context, listen: false);
@@ -59,9 +61,6 @@ class _QuestionsPageState extends State<QuestionsPage> {
               child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection('questions')
-                      .where(FieldPath.documentId,
-                          whereIn:
-                              questionsIds.map((e) => e.toString()).toList())
                       .snapshots(),
                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -69,7 +68,9 @@ class _QuestionsPageState extends State<QuestionsPage> {
                           child: CircularProgressIndicator.adaptive());
                     }
 
-                    final data = snapshot.data!.docs;
+                    final data = snapshot.data!.docs
+                        .where((element) => questionsIds.contains(element.id))
+                        .toList();
 
                     return PageView.builder(
                         controller: _controller,
@@ -105,6 +106,14 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                           'https://firebasestorage.googleapis.com/v0/b/pisale-80b0a.appspot.com/o/images%2Fdefault.png?alt=media&token=d3d5574d-d74c-4650-9ae5-19326fbd5e52'),
                                       width: 250,
                                       fit: BoxFit.cover,
+                                      imageErrorBuilder:
+                                          (context, object, stacktrace) {
+                                        return Image.network(
+                                          'https://firebasestorage.googleapis.com/v0/b/pisale-80b0a.appspot.com/o/images%2Fdefault.png?alt=media&token=d3d5574d-d74c-4650-9ae5-19326fbd5e52',
+                                          width: 250,
+                                          fit: BoxFit.cover,
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),
@@ -114,11 +123,15 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        actualQuestion.content,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          actualQuestion.content,
+                                          textAlign: TextAlign.justify,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
+                                        ),
                                       ),
                                       SizedBox(
                                         height:
@@ -192,10 +205,12 @@ class _QuestionsPageState extends State<QuestionsPage> {
                         if (testProv.questionsAnswered
                             .any((test) => test == null)) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              backgroundColor: Color(0XFFFFB818),
                               content: Text(
-                            'Debes responder a todas las preguntas',
-                            textAlign: TextAlign.center,
-                          )));
+                                'Debes responder a todas las preguntas',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              )));
                         } else {
                           testProv.updateUserResults(authProv.userLogged!);
                           Navigator.pushNamed(context, 'results');
